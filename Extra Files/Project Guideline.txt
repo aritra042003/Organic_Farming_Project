@@ -1,0 +1,79 @@
+▶️Guideline for Execution of the Project
+
+Project Title: Smart Agriculture System for Organic Farming using AI and IoT
+
+Step-by-Step Project Execution Guidelines
+▶️Phase 1: Project Planning and Hardware Setup
+Select the required sensors for soil moisture, light intensity, soil pH, soil temperature, ambient temperature, and humidity.
+
+Setup Raspberry Pi Pico W as the microcontroller for data collection and transmission.
+
+Establish Wi-Fi connectivity to enable real-time sensor data transfer to the Flask web server.
+
+Calibrate sensors properly to ensure accurate readings.
+
+▶️Phase 2: Backend and Database Development
+Create a Flask-based Python web server to receive, store, and display sensor data.
+
+Design SQLite databases:
+
+user database for registration/login management.
+
+sensor database for storing real-time sensor readings.
+
+Implement API endpoints for:
+
+Receiving sensor data via POST requests.
+
+Sending sensor data to the dashboard via GET requests.
+
+▶️Phase 3: Frontend Development
+Design interactive web pages:
+
+Home, Login, Registration, Dashboard, Analytics, About.
+
+Integrate JavaScript and AJAX for:
+
+Real-time table updates.
+
+Dynamic sensor data visualization using Chart.js.
+
+Add user-friendly navigation using a responsive navbar.
+
+▶️Phase 4: Machine Learning & Analytics Integration
+Define standard soil and environmental parameter ranges for organic farming.
+
+Write suitability analysis logic to classify sensor readings (Optimal, Needs Attention).
+
+Implement real-time analytics to:
+
+Display statistical summaries.
+
+Generate and download PDF reports of collected data.
+
+▶️Phase 5: Deployment and Testing
+Test the system locally for real-time data updates and stability.
+
+Verify data integrity in the SQLite database.
+
+Ensure secure user authentication and session management.
+
+Prepare test cases for each functionality (data reception, dashboard update, analytics).
+
+▶️Phase 6: Documentation and Presentation
+Prepare final documentation including system architecture, workflow diagrams, and detailed explanations.
+
+
+
+▶️Key Technologies Used
+1.Python (Flask)
+2.SQLite
+3.HTML, CSS, JavaScript, Chart.js
+4.Raspberry Pi Pico W
+5.Sensor interfacing via MicroPython
+
+Note:
+Maintain proper folder structures for code, databases, static files, and templates.
+
+Ensure all dependencies are installed and documented.
+

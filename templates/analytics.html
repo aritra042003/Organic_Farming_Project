@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics | Smart Organic Farming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f9f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #2d6a4f;
+            color: white;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav img {
+            height: 40px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+.images {
+    height:100px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.images img {
+ border-radius: 20px;    
+}
+        h2 {
+            color: #2d6a4f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn-download {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #40916c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .ranges,
+        .stats,
+        .ml-section {
+            margin-top: 30px;
+        }
+
+        .ml-section pre {
+            background: #e6f4ea;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <img src="https://graphicsfamily.com/wp-content/uploads/edd/2021/07/Agriculture-Logo-Design-PNG.png" alt="Logo">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="ml-section">
+            <h2>ML Analysis</h2>
+            <pre id="mlOutput">Loading model insights...</pre>
+        </div>
+        <div class="images">
+            <img src="https://media.istockphoto.com/id/1006196472/photo/bunch-of-spinach-leaves-on-isolated-white-background.jpg?s=612x612&w=0&k=20&c=OAIswtUC1aMNDwtMEFIaZv6fSIftsoAV-cgJZSGLJ7A=" alt="">
+            <img src="https://media.istockphoto.com/id/535910387/photo/ripe-organic-green-salad-romano.jpg?s=612x612&w=0&k=20&c=9GTcj_WqUk9LWkzUb6g4MCnLTPAapT_hNMZCHRd3C1U=" alt="">
+        </div>
+        <h2>Real-Time Soil & Environmental Sensor Data</h2>
+        <table id="sensorTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Soil Moisture</th>
+                    <th>Light Intensity</th>
+                    <th>Soil pH</th>
+                    <th>Soil Temp</th>
+                    <th>Ambient Temp</th>
+                    <th>Humidity</th>
+                    <th>Suitability</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be appended here by JS -->
+            </tbody>
+        </table>
+        <button class="btn-download" onclick="downloadPDF()">Download Report (PDF)</button>
+
+        <div class="ranges">
+            <h2>Standard Ranges for Organic Farming</h2>
+            <ul>
+                <li>Soil Moisture: 20% - 60%</li>
+                <li>Light Intensity: 1000 - 50000 Lux</li>
+                <li>Soil pH: 6.0 - 7.5</li>
+                <li>Soil Temp: 15°C - 30°C</li>
+                <li>Ambient Temp: 18°C - 35°C</li>
+                <li>Humidity: 40% - 70%</li>
+            </ul>
+        </div>
+
+        <div class="stats">
+            <h2>Statistical Summary (Last 10 Readings)</h2>
+            <pre id="statsOutput">Loading...</pre>
+        </div>
+
+
+    </div>
+
+    <script>
+        async function fetchSensorData() {
+            const res = await fetch("/api/sensor_data");
+            const data = await res.json();
+
+            const tbody = document.querySelector("#sensorTable tbody");
+            tbody.innerHTML = "";
+            data.forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                <td>${row.timestamp}</td>
+                <td>${row.soil_moisture}</td>
+                <td>${row.light_intensity}</td>
+                <td>${row.soil_ph}</td>
+                <td>${row.soil_temp}</td>
+                <td>${row.ambient_temp}</td>
+                <td>${row.ambient_humidity}</td>
+                <td>${row.suitability}</td>
+            `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById("statsOutput").textContent = JSON.stringify(calculateStats(data), null, 2);
+
+            document.getElementById("mlOutput").textContent = "AI predicts current soil condition as suitable for leafy vegetables like spinach and lettuce.";
+        }
+
+        function calculateStats(data) {
+            const fields = ['soil_moisture', 'light_intensity', 'soil_ph', 'soil_temp', 'ambient_temp', 'ambient_humidity'];
+            const stats = {};
+            fields.forEach(f => {
+                const values = data.map(d => parseFloat(d[f])).filter(x => !isNaN(x));
+                const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                stats[f] = { average: avg.toFixed(2) };
+            });
+            return stats;
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        setInterval(fetchSensorData, 5000);
+        fetchSensorData();
+    </script>
+
+</body>
+
+</html>

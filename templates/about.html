@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Our Smart Farming Project</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4fff4;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2e7d32;
+      padding: 10px 30px;
+    }
+
+    nav img {
+      height: 50px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      padding: 40px 60px;
+    }
+
+    h1 {
+      color: #2e7d32;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .highlight {
+      color: #1b5e20;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #2e7d32;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="https://graphicsfamily.com/wp-content/uploads/edd/2021/07/Agriculture-Logo-Design-PNG.png" alt="Logo">
+    <ul>
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+      <li><a href="{{ url_for('about') }}">About</a></li>
+      {% if 'user' in session %}
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% else %}
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>About Our Smart Agriculture System</h1>
+
+    <div class="section">
+      <p>
+        Our project, <span class="highlight">Smart Agriculture for Organic Farming</span>, combines the power of 
+        <span class="highlight">AI, IoT, and real-time data analysis</span> to monitor farm conditions and help 
+        farmers make informed decisions. Designed for simplicity and effectiveness, this system improves crop 
+        quality while promoting sustainable practices.
+      </p>
+
+      <!-- Add image here -->
+      <img src="https://blog.peigenesis.com/hs-fs/hubfs/smart%20farming%20innovation.jpg?width=746&height=420&name=smart%20farming%20innovation.jpg" alt="Smart Farming Overview">
+    </div>
+
+    <div class="section">
+      <h2>Sensor Integration</h2>
+      <p>
+        We use a range of calibrated sensors to measure critical parameters in real-time:
+      </p>
+      <ul>
+        <li><strong>Soil Moisture:</strong> Helps prevent under/overwatering.</li>
+        <li><strong>Light Intensity:</strong> Assesses the available sunlight.</li>
+        <li><strong>Soil pH:</strong> Determines soil acidity for optimal crop growth.</li>
+        <li><strong>Soil Temperature:</strong> Monitors root-zone heat for better seed germination.</li>
+        <li><strong>Ambient Temperature & Humidity:</strong> Tracks environmental conditions for overall plant health.</li>
+      </ul>
+
+      <!-- Add image here -->
+      <img src="https://www.raspberrypi.com/documentation/microcontrollers/images/picow-pinout.svg" alt="Sensor Layout">
+    </div>
+
+    <div class="section">
+      <h2>Our Technology Stack</h2>
+      <p>
+        The project is built using:
+      </p>
+      <ul>
+        <li><strong>Microcontroller:</strong> Raspberry Pi Pico W with MicroPython</li>
+        <li><strong>Web Backend:</strong> Python Flask + SQLite3</li>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript, Tailwind CSS</li>
+        <li><strong>Communication:</strong> Wi-Fi data push to the Flask server</li>
+        <li><strong>AI Recommendation (Upcoming):</strong> NLP-based insights for organic practices</li>
+      </ul>
+
+      <!-- Add image here -->
+      <img src="" alt="Technology Stack">
+    </div>
+
+    <div class="section">
+      <h2>Future Goals</h2>
+      <p>
+        We plan to extend the system with:
+        <ul>
+          <li>AI-based crop and fertilizer recommendations</li>
+          <li>Weather integration for predictive alerts</li>
+          <li>Mobile app for real-time monitoring</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Smart Agriculture | Developed by Team GreenTech
+  </footer>
+
+</body>
+</html>

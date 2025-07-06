@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Agriculture</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="https://graphicsfamily.com/wp-content/uploads/edd/2021/07/Agriculture-Logo-Design-PNG.png"
+                alt="Logo">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+
+                {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div>
+            <img src="https://images.unsplash.com/photo-1620200423727-8127f75d7f53?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+        <h1>Revolutionizing Organic Farming with Smart Technology!</h1>
+
+    </header>
+
+    <main>
+        <section id="sec1">
+            <h1>Welcome to Smart Agriculture System</h1>
+            <p>"Empowering farmers with AI and IoT to achieve sustainable and efficient organic farming. Monitor soil
+                conditions, optimize water usage, and make data-driven decisions—all in real time!"</p>
+
+            {% if 'user' in session %}
+            <h3>Hello, {{ session['user'] }}! <a href="{{ url_for('logout') }}">Logout</a></h3>
+            {% else %}
+            <h3>Please <a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('register') }}">Register</a> to
+                access full features.</h3>
+            {% endif %}
+        </section>
+        <section id="about">
+            <h2>🌿 What is Organic Farming?</h2>
+            <p>Organic farming promotes sustainability by avoiding synthetic chemicals and focusing on natural growth
+                techniques.</p>
+        </section>
+
+        <section id="principles">
+            <h2>💡 Key Principles of Organic Farming</h2>
+            <div class="grid-container">
+                <div class="grid-item">🌱 <b>Soil Health</b><br>Enhances soil fertility with compost & crop rotation.
+                </div>
+                <div class="grid-item">🐝 <b>Biodiversity</b><br>Encourages ecological balance in farming.</div>
+                <div class="grid-item">🚰 <b>Water Conservation</b><br>Uses rainwater harvesting & smart irrigation.
+                </div>
+                <div class="grid-item">🛑 <b>No Harmful Chemicals</b><br>Avoids synthetic pesticides & fertilizers.
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <section id="importance">
+            <h2>🌎 Why is Organic Farming Important?</h2>
+            <ul>
+                <li>✅ Protects Human Health – No harmful chemical residues.</li>
+                <li>✅ Preserves the Environment – Reduces pollution & enhances soil fertility.</li>
+                <li>✅ Supports Climate Action – Reduces carbon footprint.</li>
+                <li>✅ Enhances Food Quality – More nutritious and natural taste.</li>
+                <li>✅ Empowers Farmers – Reduces dependency on synthetic inputs.</li>
+            </ul>
+        </section>
+
+        <section id="smart-agriculture">
+            <h2>📈 Organic Farming & Smart Agriculture</h2>
+            <p>With AI, IoT, and automation, organic farming is evolving.</p>
+            <div class="grid-container">
+                <div class="grid-item">🔹 Smart Sensors<br>Monitor soil moisture & nutrients.</div>
+                <div class="grid-item">🔹 AI-based Disease Detection<br>Identify plant diseases early.</div>
+                <div class="grid-item">🔹 Precision Irrigation<br>Optimize water use.</div>
+                <div class="grid-item">🔹 Smart Crop Yield Prediction<br>Enhance farm productivity.</div>
+            </div>
+        </section>
+        <section id="future">
+            <h2>📈 The Future of Organic Farming</h2>
+            <p>With AI, IoT, and smart agriculture, organic farming is evolving to be more efficient and productive.As
+                consumers become more conscious of health and sustainability, the demand for organic products is rising.
+                Governments worldwide are promoting organic farming through subsidies, awareness campaigns, and
+                eco-certifications.
+                Join the movement toward sustainable farming! 🌍
+                🌱 "Grow healthy, eat healthy, and sustain the planet!" </p>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>🌱 About Us</h3>
+                <p>We are committed to revolutionizing organic farming with AI and IoT-powered smart agriculture solutions. Our goal is to help farmers increase productivity while ensuring environmental sustainability.</p>
+            </div>
+    
+            <div class="footer-section links">
+                <h3>🔗 Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section contact">
+                <h3>📞 Contact Us</h3>
+                <p>Email: <a href="mailto:support@smartagriculture.com">support@smartagriculture.com</a></p>
+                <p>Phone: +91 98765 43210</p>
+                <p>Location: 123 Greenfield, Organic Valley, India</p>
+            </div>
+    
+            <div class="footer-section social">
+                <h3>📢 Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174876.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Smart Agriculture | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+</body>
+
+</html>
